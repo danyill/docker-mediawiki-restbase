@@ -46,7 +46,7 @@ RUN addgroup -S node \
 
 RUN npm install -g parsoid && apk del .build-deps
 
-COPY config.yaml /usr/local/lib/node_modules/parsoid/config.yaml
+COPY config.yaml /usr/local/lib/node_modules/restbase/config.yaml
 
 WORKDIR /usr/local/lib/node_modules/restbase/
 
