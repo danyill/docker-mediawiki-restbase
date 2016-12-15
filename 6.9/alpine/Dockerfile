@@ -48,6 +48,6 @@ RUN npm install -g parsoid && apk del .build-deps
 
 COPY config.yaml /usr/local/lib/node_modules/parsoid/config.yaml
 
-WORKDIR /usr/local/lib/node_modules/parsoid/
+WORKDIR /usr/local/lib/node_modules/restbase/
 
-CMD node bin/server.js
+CMD node ./server.js
