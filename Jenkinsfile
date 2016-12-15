@@ -47,7 +47,7 @@ node{
              {
                  // Test that port 80 is exposed
                  echo "Exposed Docker Ports:"
-                 test_results = sh([script: "docker inspect --format '{{ (.NetworkSettings.Ports) }}' ${container_name} | grep map | grep '8000/tcp:'", returnStatus:true])
+                 test_results = sh([script: "docker inspect --format '{{ (.NetworkSettings.Ports) }}' ${container_name} | grep map | grep '7231/tcp:'", returnStatus:true])
                  if (test_results != 0){
                    currentBuild.result = 'FAILURE'
                    error "Failed to finish container testing. Ports not exposed"
