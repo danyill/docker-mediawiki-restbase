@@ -1,7 +1,7 @@
 FROM alpine:3.4
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 6.9.1
+ENV NODE_VERSION 6.9.2
 
 RUN addgroup -S node \
     && adduser -D -S -h /var/cache/node -s /sbin/nologin -G node node \
@@ -44,10 +44,14 @@ RUN addgroup -S node \
     && rm -Rf "node-v$NODE_VERSION" \
     && rm "node-v$NODE_VERSION.tar.gz" SHASUMS256.txt.asc SHASUMS256.txt
 
-RUN npm install -g parsoid && apk del .build-deps
+RUN echo '13670' && npm install -g restbase && apk del .build-deps
 
 COPY config.yaml /usr/local/lib/node_modules/restbase/config.yaml
 
 WORKDIR /usr/local/lib/node_modules/restbase/
+
+RUN npm install
+
+EXPOSE 7231
 
 CMD node ./server.js

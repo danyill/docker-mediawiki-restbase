@@ -50,6 +50,8 @@ COPY config.yaml /usr/local/lib/node_modules/restbase/config.yaml
 
 WORKDIR /usr/local/lib/node_modules/restbase/
 
+RUN npm install
+
 EXPOSE 7231
 
 CMD node ./server.js

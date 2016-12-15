@@ -44,10 +44,14 @@ RUN addgroup -S node \
     && rm -Rf "node-v$NODE_VERSION" \
     && rm "node-v$NODE_VERSION.tar.gz" SHASUMS256.txt.asc SHASUMS256.txt
 
-RUN npm install -g parsoid && apk del .build-deps
+RUN echo '29420' && npm install -g restbase && apk del .build-deps
 
-COPY config.yaml /usr/local/lib/node_modules/parsoid/config.yaml
+COPY config.yaml /usr/local/lib/node_modules/restbase/config.yaml
 
-WORKDIR /usr/local/lib/node_modules/parsoid/
+WORKDIR /usr/local/lib/node_modules/restbase/
 
-CMD node bin/server.js
+RUN npm install
+
+EXPOSE 7231
+
+CMD node ./server.js

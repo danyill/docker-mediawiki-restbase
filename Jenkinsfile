@@ -20,7 +20,7 @@ node{
   stage('Test') {
     try {
 
-      docker.image("${maintainer_name}/${container_name}:${build_tag}").withRun("--name=${container_name} -d -p 127.0.0.1:8500:8000")  { c ->
+      docker.image("${maintainer_name}/${container_name}:${build_tag}").withRun("--name=${container_name} -d -p 127.0.0.1:7231:7231")  { c ->
         timeout(time: 60, unit: 'SECONDS'){
            waitUntil {
                def wait = sh([script: $/docker logs ${container_name} | grep "Startup finished"/$, returnStatus: true])
@@ -37,7 +37,7 @@ node{
              if (test_num == 0 )
              {
                  test_results = sh([script: "curl -s 127.0.0.1:8500 | grep -o 'Welcome.*Parsoid'", returnStatus:true])
-                 build_tag = sh([script: $/curl -s https://www.npmjs.com/package/parsoid | grep strong | grep -o "[0-9]*\.[0-9]*\.[0-9]*"/$, returnStdout: true])
+                 build_tag = sh([script: $/curl -s https://www.npmjs.com/package/restbase | grep strong | grep -o "[0-9]*\.[0-9]*\.[0-9]*"/$, returnStdout: true])
                  if (test_results != 0){
                    currentBuild.result = 'FAILURE'
                    error "Failed to finish container testing. Parsoid Not running"
