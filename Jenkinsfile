@@ -36,7 +36,7 @@ node{
              expected_results = 0
              if (test_num == 0 )
              {
-                 test_results = sh([script: "curl -s 127.0.0.1:8500 | grep -o 'Welcome.*Parsoid'", returnStatus:true])
+                 test_results = sh([script: "curl -s 127.0.0.1:7231 | grep -o 'localhost'", returnStatus:true])
                  build_tag = sh([script: $/curl -s https://www.npmjs.com/package/restbase | grep strong | grep -o "[0-9]*\.[0-9]*\.[0-9]*"/$, returnStdout: true])
                  if (test_results != 0){
                    currentBuild.result = 'FAILURE'
