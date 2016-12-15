@@ -3,18 +3,18 @@ registry_url = "https://index.docker.io/v1/"
 docker_creds_id = "rlewkowicz"
 build_tag = "testing"
 maintainer_name = "rlewkowicz"
-container_name = "parsoid"
+container_name = "restbase"
 node{
   retry( count: 3  ){
     timeout(time: 60, unit: 'SECONDS') {
       stage('Pull and Update') {
-        git url: 'https://github.com/rlewkowicz/docker-mediawiki-parsoid.git'
+        git url: 'https://github.com/rlewkowicz/docker-mediawiki-restbase.git'
         sh './update.sh'
       }
     }
   }
   stage('Build') {
-    echo "Building PHP-FPM with docker.build(${maintainer_name}/${container_name}:${build_tag})"
+    echo "Building restbase with docker.build(${maintainer_name}/${container_name}:${build_tag})"
     container = docker.build("${maintainer_name}/${container_name}:${build_tag}", '6.9/alpine/')
   }
   stage('Test') {
